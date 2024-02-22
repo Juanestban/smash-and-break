@@ -81,6 +81,8 @@ shape = SubResource("RectangleShape2D_7y4g1")
 
 [node name="ball" parent="." node_paths=PackedStringArray("area_game_over") instance=ExtResource("2_g034m")]
 position = Vector2(576, 610)
+collision_layer = 4
+collision_mask = 11
 area_game_over = NodePath("../area_game_over")
 
 [node name="player" parent="." node_paths=PackedStringArray("area_game_over") instance=ExtResource("1_diojr")]

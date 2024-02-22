@@ -29,9 +29,7 @@ func move():
 		x = 0
 		y = -1
 	else:
-		var direction = Input.get_axis("move_left", "move_right")
-
-		velocity.x = direction * x * SPEED
+		velocity.x = x * SPEED
 		velocity.y = y * SPEED
 
 	move_and_slide()
@@ -40,15 +38,28 @@ func move_rebound(direction: StringName):
 	if direction == 'bottom' and is_first_rebound:
 		return
 	print('move_rebound, [', direction, ']')
-
 	is_first_rebound = false
-
-	y *= -1
-	x *= -1
+	
+	if direction == 'top':
+		y = 1
+		return
+	
+	# block for queque remove
+	if direction == 'block':
+		pass
+	
+	if direction == 'right' or direction == 'left':
+		x *= -1
+		return
 
 	var orientation = Input.get_axis("move_left", "move_right")
-	if orientation:
+	y = -1
+	if orientation and direction == 'bottom':
 		x = -1 if orientation == 1 else 1
+		return
+	
+	if direction == 'bottom':
+		x *= -1
 
 func reset_position():
 	position = initial_position
