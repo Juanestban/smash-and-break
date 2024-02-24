@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dn6vt5l8f1hwv"]
+[gd_scene load_steps=12 format=3 uid="uid://dn6vt5l8f1hwv"]
 
 [ext_resource type="Script" path="res://Scripts/game_over.gd" id="1_60jjx"]
 [ext_resource type="PackedScene" uid="uid://b7wk6wmqs43a1" path="res://Entities/player.tscn" id="1_diojr"]
 [ext_resource type="Script" path="res://Scripts/rebound.gd" id="1_rh8y6"]
+[ext_resource type="Script" path="res://Scripts/init_game.gd" id="1_xyc7x"]
 [ext_resource type="PackedScene" uid="uid://cofm02knmjrq2" path="res://Entities/ball.tscn" id="2_g034m"]
+[ext_resource type="Script" path="res://Scripts/duration.gd" id="5_kjys8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4yqi8"]
 size = Vector2(1152, 20)
@@ -14,7 +16,16 @@ size = Vector2(1152, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7y4g1"]
 size = Vector2(11.25, 648)
 
+[sub_resource type="LabelSettings" id="LabelSettings_3hun0"]
+line_spacing = 0.0
+font_size = 17
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ls71"]
+line_spacing = 0.0
+font_size = 24
+
 [node name="game" type="Node2D"]
+script = ExtResource("1_xyc7x")
 
 [node name="area_game_over" type="Area2D" parent="."]
 position = Vector2(0, 658)
@@ -88,3 +99,50 @@ area_game_over = NodePath("../area_game_over")
 [node name="player" parent="." node_paths=PackedStringArray("area_game_over") instance=ExtResource("1_diojr")]
 position = Vector2(576, 320)
 area_game_over = NodePath("../area_game_over")
+
+[node name="ui" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 56.0
+
+[node name="score" type="Panel" parent="ui"]
+layout_mode = 0
+offset_top = 8.0
+offset_right = 112.0
+offset_bottom = 32.0
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="ui/score"]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 104.0
+offset_bottom = 24.0
+text = "Score: "
+label_settings = SubResource("LabelSettings_3hun0")
+vertical_alignment = 1
+
+[node name="duration" type="Panel" parent="ui"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -72.0
+offset_right = 72.0
+offset_bottom = 40.0
+grow_horizontal = 2
+script = ExtResource("5_kjys8")
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="ui/duration"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 3.0
+offset_right = 136.0
+offset_bottom = 37.0
+text = "00:00"
+label_settings = SubResource("LabelSettings_7ls71")
+horizontal_alignment = 1
+vertical_alignment = 1

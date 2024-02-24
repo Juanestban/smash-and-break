@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://b72daciixg66m"]
+
+[ext_resource type="Texture2D" uid="uid://bsfj626cr12vc" path="res://Assets/blocks.png" id="1_go73y"]
+[ext_resource type="Script" path="res://Scripts/block.gd" id="1_offuy"]
+[ext_resource type="Script" path="res://Scripts/rebound.gd" id="2_hlalc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7u6up"]
+size = Vector2(74, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ij280"]
+size = Vector2(74, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ts0ad"]
+size = Vector2(74, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pct77"]
+size = Vector2(2, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yteq0"]
+size = Vector2(2, 20)
+
+[node name="block" type="Node2D"]
+script = ExtResource("1_offuy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_7u6up")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("1_go73y")
+vframes = 5
+
+[node name="area_block_top" type="Area2D" parent="StaticBody2D"]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("2_hlalc")
+direction = &"block_top"
+
+[node name="top" type="CollisionShape2D" parent="StaticBody2D/area_block_top"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_ij280")
+
+[node name="area_block_bottom" type="Area2D" parent="StaticBody2D"]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("2_hlalc")
+direction = &"block_bottom"
+
+[node name="bottom" type="CollisionShape2D" parent="StaticBody2D/area_block_bottom"]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_ts0ad")
+
+[node name="area_block_left" type="Area2D" parent="StaticBody2D"]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("2_hlalc")
+direction = &"block_left"
+
+[node name="left" type="CollisionShape2D" parent="StaticBody2D/area_block_left"]
+position = Vector2(36, 0)
+shape = SubResource("RectangleShape2D_pct77")
+
+[node name="area_block_right" type="Area2D" parent="StaticBody2D"]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("2_hlalc")
+direction = &"block_right"
+
+[node name="right" type="CollisionShape2D" parent="StaticBody2D/area_block_right"]
+position = Vector2(-36, 0)
+shape = SubResource("RectangleShape2D_yteq0")

@@ -46,7 +46,7 @@ func move_rebound(direction: StringName):
 	
 	# block for queque remove
 	if direction == 'block':
-		pass
+		return
 	
 	if direction == 'right' or direction == 'left':
 		x *= -1
