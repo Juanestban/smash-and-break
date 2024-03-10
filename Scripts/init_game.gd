@@ -20,10 +20,10 @@ func _ready():
 			block.position.x = (WIDTH_BLOCK * x) + INITIAL_POSITION_X + 1
 			block.position.y = (HEIGHT_BLOCK * y) + INITIAL_POSITION_Y + 1
 
-			block.on_destroy.connect(on_destroy_block)
+			block.on_destroy.connect(func(pos: Vector2): on_destroy_block(pos))
 			block.sound_destroy = sound_destroy
 
 			add_child(block)
 
-func on_destroy_block():
-	pass
+func on_destroy_block(pos: Vector2):
+	print(pos.x, ' ', pos.y)
